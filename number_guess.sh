@@ -21,7 +21,7 @@ if [[ -z $USER_ID ]]
 
   GAMES_USER=$($PSQL "SELECT COUNT(game_id) FROM games WHERE user_id=$USER_ID;")
   BEST_GAME=$($PSQL "SELECT MIN(counter) FROM games WHERE user_id=$USER_ID;")
-  echo "Welcome back, $USERNAME! You have played $GAMES_USER games, and your best game took $BEST_GAME guesses." | sed "s/      / /" | sed "s/    / /"
+  echo "Welcome back, $USERNAME! You have played $GAMES_USER games, and your best game took $BEST_GAME guesses."
 fi
 
 echo "Guess the secret number between 1 and 1000:"
@@ -35,13 +35,14 @@ do
   if [[ $NUMBER_GUESS < $RANDOM_NUMBER && $NUMBER_GUESS =~ ^^[0-9]+$ ]]
   then
   echo "It's lower than that, guess again:"
+  COUNTER=$((COUNTER+1))
   elif [[ $NUMBER_GUESS > $RANDOM_NUMBER && $NUMBER_GUESS =~ ^^[0-9]+$ ]]
   then
   echo "It's higher than that, guess again:"
+  COUNTER=$((COUNTER+1))
   else 
   echo "That is not an integer, guess again:" 
   fi
-  COUNTER=$((COUNTER+1))
   read NUMBER_GUESS
 done
 
