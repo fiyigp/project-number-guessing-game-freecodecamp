@@ -24,7 +24,7 @@ if [[ -z $USER_ID ]]
   echo "Welcome back, $USERNAME! You have played $GAMES_USER games, and your best game took $BEST_GAME guesses." | sed "s/      / /" | sed "s/    / /"
 fi
 
-echo "Guess the secret number between 1 and 1000: ($RANDOM_NUMBER)"
+echo "Guess the secret number between 1 and 1000:"
 
 read NUMBER_GUESS
 
